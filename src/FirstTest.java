@@ -133,7 +133,7 @@ public class FirstTest {
 
         Assert.assertEquals(
                 "We see unexpected title",
-                "Javgrgera",
+                "Java",
                 article_title
         );
     }
