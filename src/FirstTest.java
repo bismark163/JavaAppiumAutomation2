@@ -27,7 +27,7 @@ public class FirstTest {
         capabilities.setCapability("automationName","Appium");
         capabilities.setCapability("appPackage","org.wikipedia");
         capabilities.setCapability("appActivity",".main.MainActivity");
-        capabilities.setCapability("app","/Users/kirill.maksimenkov/Desktop/org.wikipedia.apk");
+        capabilities.setCapability("app","/Users/bismark163/Desktop/org.wikipedia.apk");
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
     }
@@ -38,7 +38,7 @@ public class FirstTest {
         driver.quit();
     }
 
-    @Test
+   /* @Test
 
     public void testCancelSearch()
     {
@@ -73,7 +73,7 @@ public class FirstTest {
                 "X is still on page",
                 5
         );
-    }
+    } */
 
     @Test
     public void firstTest()
@@ -84,22 +84,30 @@ public class FirstTest {
                 5
         );
 
-        waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text, 'Поиск')]"),
-                "Java",
-                "Cannot find input element",
-                5
-        );
 
         waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java']"),
+                By.id("org.wikipedia:id/search_src_text"),
                 "Cannot find Java",
                 15
         );
-        //System.out.println("First test run");[@text='Object-oriented programming language']//*
+
+        WebElement title_element = waitForElementPresent(
+                By.id("org.wikipedia:id/search_src_text"),
+                "Cannot find article",
+                15
+
+        );
+
+        String search_placeholder = title_element.getAttribute("text");
+
+        Assert.assertEquals(
+                "We see unexpected title",
+                "Поиск",
+                search_placeholder
+        );
     }
 
-    @Test
+  /*  @Test
     public void testCompareArticleTitle()
     {
         waitForElementAndClick(
@@ -136,7 +144,7 @@ public class FirstTest {
                 "Java",
                 article_title
         );
-    }
+    }*/
 
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds)
     {
