@@ -75,7 +75,7 @@ public class FirstTest {
         );
     } */
 
-    @Test
+   /* @Test
     public void firstTest()
     {
         waitForElementAndClick(
@@ -105,9 +105,9 @@ public class FirstTest {
                 "Поиск",
                 search_placeholder
         );
-    }
+    }*/
 
-  /*  @Test
+    @Test
     public void testCompareArticleTitle()
     {
         waitForElementAndClick(
@@ -119,32 +119,34 @@ public class FirstTest {
 
         waitForElementAndSendKeys(
                 By.xpath("//*[contains(@text, 'Поиск')]"),
-                "Java",
+                "Warcraft",
                 "Cannot find input element",
                 5
         );
 
-        waitForElementAndClick(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java']"),
-                "Cannot find cancel button",
-                5
-        );
 
-        WebElement title_element = waitForElementPresent(
-                By.id("org.wikipedia:id/view_page_title_text"),
+        WebElement list_of_articles = waitForElementPresent(
+                By.id("org.wikipedia:id/page_list_item_container"),
                 "Cannot find article",
                 15
 
         );
 
-        String article_title = title_element.getAttribute("text");
-
-        Assert.assertEquals(
-                "We see unexpected title",
-                "Java",
-                article_title
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_close_btn"),
+                "Cannot find cancel button",
+                5
         );
-    }*/
+
+
+
+        waitForElementNotPresent(
+                By.id("rg.wikipedia:id/page_list_item_container"),
+                "X is still on page",
+                5
+        );
+
+    }
 
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds)
     {
