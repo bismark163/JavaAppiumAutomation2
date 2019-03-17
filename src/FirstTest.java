@@ -48,13 +48,6 @@ public class FirstTest {
                 5
         );
 
-
-        waitForElementPresent(
-                By.id("org.wikipedia:id/search_src_text"),
-                "Cannot find Java",
-                15
-        );
-
         checkPlaceholder(
                 By.id("org.wikipedia:id/search_src_text"),
                 "",
@@ -69,7 +62,7 @@ public class FirstTest {
         String placeholder = search_container.getAttribute("text");
         Assert.assertEquals(
                 "Unexpected placeholder",
-                "Поиcк",
+                "Поиск",
                 placeholder
 
         );
