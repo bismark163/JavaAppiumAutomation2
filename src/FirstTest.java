@@ -38,77 +38,9 @@ public class FirstTest {
         driver.quit();
     }
 
-   /* @Test
-
-    public void testCancelSearch()
-    {
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_container"),
-                "Cannot find search input",
-                5
-
-        );
-
-        waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text, 'Поиск')]"),
-                "Java",
-                "Cannot find input element",
-                5
-        );
-
-        waitForElementAndClear(
-                By.id("org.wikipedia:id/search_src_text"),
-                "Cant find text",
-                5
-        );
-
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_close_btn"),
-                "Cannot find cancel button",
-                5
-        );
-
-        waitForElementNotPresent(
-                By.id("org.wikipedia:id/search_close_btn"),
-                "X is still on page",
-                5
-        );
-    } */
-
-   /* @Test
-    public void firstTest()
-    {
-        waitForElementAndClick(
-                By.xpath("//*[contains(@text, 'Поиск по Википедии')]"),
-                "Cannot find search input",
-                5
-        );
-
-
-        waitForElementPresent(
-                By.id("org.wikipedia:id/search_src_text"),
-                "Cannot find Java",
-                15
-        );
-
-        WebElement title_element = waitForElementPresent(
-                By.id("org.wikipedia:id/search_src_text"),
-                "Cannot find article",
-                15
-
-        );
-
-        String search_placeholder = title_element.getAttribute("text");
-
-        Assert.assertEquals(
-                "We see unexpected title",
-                "Поиск",
-                search_placeholder
-        );
-    }*/
 
     @Test
-    public void testCompareArticleTitle()
+    public void cancelSearch()
     {
         waitForElementAndClick(
                 By.id("org.wikipedia:id/search_container"),
@@ -140,9 +72,9 @@ public class FirstTest {
 
 
 
-        waitForElementNotPresent(
-                By.id("rg.wikipedia:id/page_list_item_container"),
-                "X is still on page",
+        waitForElementPresent(
+                By.id("org.wikipedia:id/search_empty_message"),
+                "Page is not empty",
                 5
         );
 
