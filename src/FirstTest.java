@@ -38,45 +38,9 @@ public class FirstTest {
         driver.quit();
     }
 
-   /* @Test
-
-    public void testCancelSearch()
-    {
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_container"),
-                "Cannot find search input",
-                5
-
-        );
-
-        waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text, 'Поиск')]"),
-                "Java",
-                "Cannot find input element",
-                5
-        );
-
-        waitForElementAndClear(
-                By.id("org.wikipedia:id/search_src_text"),
-                "Cant find text",
-                5
-        );
-
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_close_btn"),
-                "Cannot find cancel button",
-                5
-        );
-
-        waitForElementNotPresent(
-                By.id("org.wikipedia:id/search_close_btn"),
-                "X is still on page",
-                5
-        );
-    } */
 
     @Test
-    public void firstTest()
+    public void checkPlaceholder()
     {
         waitForElementAndClick(
                 By.xpath("//*[contains(@text, 'Поиск по Википедии')]"),
@@ -91,60 +55,28 @@ public class FirstTest {
                 15
         );
 
-        WebElement title_element = waitForElementPresent(
+        checkPlaceholder(
                 By.id("org.wikipedia:id/search_src_text"),
-                "Cannot find article",
+                "",
                 15
 
-        );
-
-        String search_placeholder = title_element.getAttribute("text");
-
-        Assert.assertEquals(
-                "We see unexpected title",
-                "Поиск",
-                search_placeholder
         );
     }
 
-  /*  @Test
-    public void testCompareArticleTitle()
+    private WebElement checkPlaceholder(By by, String error_message, long timeoutInSeconds)
     {
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_container"),
-                "Cannot find search input",
-                5
-
-        );
-
-        waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text, 'Поиск')]"),
-                "Java",
-                "Cannot find input element",
-                5
-        );
-
-        waitForElementAndClick(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java']"),
-                "Cannot find cancel button",
-                5
-        );
-
-        WebElement title_element = waitForElementPresent(
-                By.id("org.wikipedia:id/view_page_title_text"),
-                "Cannot find article",
-                15
-
-        );
-
-        String article_title = title_element.getAttribute("text");
-
+        WebElement search_container = waitForElementPresent(by, error_message, 15);
+        String placeholder = search_container.getAttribute("text");
         Assert.assertEquals(
-                "We see unexpected title",
-                "Java",
-                article_title
+                "Unexpected placeholder",
+                "Поиcк",
+                placeholder
+
         );
-    }*/
+        return search_container;
+
+    }
+
 
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds)
     {
@@ -173,7 +105,6 @@ public class FirstTest {
         element.sendKeys(value);
         return element;
     }
-
 
     private boolean waitForElementNotPresent(By by, String error_message, long timeoutInSeconds)
     {
