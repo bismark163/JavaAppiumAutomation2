@@ -44,9 +44,10 @@ public class FirstTest {
         driver.quit();
     }
 
-    @Test
 
-    public void testCancelSearch()
+
+    @Test
+    public void saveTwoArticleToMyListAndDeleteOneWithChekingTitle()
     {
         waitForElementAndClick(
                 By.id("org.wikipedia:id/search_container"),
@@ -56,137 +57,7 @@ public class FirstTest {
         );
 
         waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text, 'Поиск')]"),
-                "Java",
-                "Cannot find input element",
-                5
-        );
-
-        waitForElementAndClear(
                 By.id("org.wikipedia:id/search_src_text"),
-                "Cant find text",
-                5
-        );
-
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_close_btn"),
-                "Cannot find cancel button",
-                5
-        );
-
-        waitForElementNotPresent(
-                By.id("org.wikipedia:id/search_close_btn"),
-                "X is still on page",
-                5
-        );
-    }
-
-    @Test
-    public void firstTest()
-    {
-        waitForElementAndClick(
-                By.xpath("//*[contains(@text, 'Поиск по Википедии')]"),
-                "Cannot find search input",
-                5
-        );
-
-        waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text, 'Поиск')]"),
-                "Java",
-                "Cannot find input element",
-                5
-        );
-
-        waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java']"),
-                "Cannot find Java",
-                15
-        );
-        //System.out.println("First test run");[@text='Object-oriented programming language']//*
-    }
-
-    @Test
-    public void testCompareArticleTitle()
-    {
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_container"),
-                "Cannot find search input",
-                5
-
-        );
-
-        waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text, 'Поиск')]"),
-                "Java",
-                "Cannot find input element",
-                5
-        );
-
-        waitForElementAndClick(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Java']"),
-                "Cannot find cancel button",
-                5
-        );
-
-        WebElement title_element = waitForElementPresent(
-                By.id("org.wikipedia:id/view_page_title_text"),
-                "Cannot find article",
-                15
-
-        );
-
-        String article_title = title_element.getAttribute("text");
-
-        Assert.assertEquals(
-                "We see unexpected title",
-                "Java",
-                article_title
-        );
-    }
-
-    @Test
-    public void testSwipeArticle()
-    {
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_container"),
-                "Cannot find search input",
-                5
-
-        );
-
-        waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text, 'Поиск')]"),
-                "Ересь",
-                "Cannot find input element",
-                5
-        );
-
-        waitForElementAndClick(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Сознательное отклонение от общепринятого вероучения']"),
-                "Cannot find cancel button",
-                5
-        );
-
-        swipeUpToFindElement(
-                By.xpath("//*[@text='Просмотр страницы в браузере']"),
-                "Cannot find the end of the article",
-                20
-        );
-
-    }
-
-    @Test
-    public void saveFirstArticleToMyList()
-    {
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_container"),
-                "Cannot find search input",
-                5
-
-        );
-
-        waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text, 'Поиск')]"),
                 "Ересь Хоруса",
                 "Cannot find input element",
                 5
@@ -212,8 +83,8 @@ public class FirstTest {
         );
 
         waitForElementAndClick(
-                By.xpath("//*[@index=3]"),
-                "да работай блядь",
+                By.xpath("//*[@index='3']"),
+                "Cant find button to add article to my list",
                 5
         );
 
@@ -251,7 +122,60 @@ public class FirstTest {
         );
 
         waitForElementAndClick(
-                By.xpath("//android.widget.FrameLayout[@content-desc='Мои списки']"),
+                By.id("org.wikipedia:id/search_container"),
+                "Cannot find search input",
+                5
+
+        );
+
+        waitForElementAndSendKeys(
+                By.id("org.wikipedia:id/search_src_text"),
+                "Империум",
+                "Cannot find input element",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Империум (Warhammer 40,000)']"),
+                "Cannot find article",
+                5
+        );
+
+        waitForElementPresent(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                "Cannot find article",
+                15
+
+        );
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageView[@content-desc='Ещё']"),
+                "Cannot find trippledot",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@index='3']"),
+                "Cant find button to add article to my list",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@text='Horus Heresy']"),
+                "Cannot find 'Понятно' button",
+                5
+        );
+
+
+        waitForElementAndClick(
+                By.xpath("//android.widget.ImageButton[@content-desc='Перейти вверх']"),
+                "Cannot close article, cannot find X link",
+                5
+        );
+
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/fragment_main_nav_tab_layout"),
                 "Cannot find navigation button to My lists",
                 5
         );
@@ -267,123 +191,26 @@ public class FirstTest {
                 "Cannot find saved article"
         );
 
-        waitForElementNotPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Ересь Хоруса']"),
-                "Cannot delete save artcile",
-                5
-        );
-
-
-
-    }
-
-    @Test
-    public void testAmountOfNotEmptySearch()
-    {
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_container"),
-                "Cannot find search input",
-                5
-
-        );
-
-        String search_line = "Ересь Хоруса";
-
-        waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text, 'Поиск')]"),
-                search_line,
-                "Cannot find input element",
-                5
-        );
-
-        String search_result_locator = "//*[@resource-id='org.wikipedia:id/search_results_list']/*[@resource-id='org.wikipedia:id/page_list_item_container']";
-
         waitForElementPresent(
-                By.xpath(search_result_locator),
-                "Cannot find anything by request " + search_line,
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Империум (Warhammer 40,000)']"),
+                "The article is not on page",
                 5
         );
 
-        int amount_of_search_results = getAmountOfElements(
-                By.xpath(search_result_locator)
-
-        );
-        Assert.assertTrue(
-                "We found too few results!",
-                amount_of_search_results > 0
-        );
-    }
-
-
-    @Test
-    public void testAmountOfEmptySearch()
-    {
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_container"),
-                "Cannot find search input",
-                5
-
-        );
-
-        String search_line = "Java";
-
-        waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text, 'Поиск')]"),
-                search_line,
-                "Cannot find input element",
-                5
-        );
-
-        String search_result_locator = "//*[@resource-id='org.wikipedia:id/search_results_list']/*[@resource-id='org.wikipedia:id/page_list_item_container']";
-        String empty_result_label = "//*[@text='Ничего не найдено']";
-
-        waitForElementPresent(
-                By.xpath(empty_result_label),
-                "Cannot find empty result label"+ search_line,
-                15
-        );
-
-        assertElementNotPresent(
-                By.xpath(search_result_locator),
-                "We've found some results by request " + search_line
-        );
-    }
-
-    @Test
-    public void testChangeSreenOrientationOnSearchResult()
-    {
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_container"),
-                "Cannot find search input",
-                5
-
-        );
-
-        String search_line = "Ересь Хоруса";
-
-        waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text, 'Поиск')]"),
-                search_line,
-                "Cannot find input element",
-                5
-        );
-
-        waitForElementAndClick(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Ересь Хоруса']"),
-                "Cannot find 'Ересь Хоруса' topic searching by " + search_line,
-                15
-        );
-
-        String title_before_rotation = waitForElementAndGetAttribute(
-                By.id("org.wikipedia:id/view_page_title_text"),
+        String title_on_folder_page = waitForElementAndGetAttribute(
+                By.id("org.wikipedia:id/page_list_item_title"),
                 "text",
-                "Caanot find title of article",
+                "Cannot find title of article",
                 15
         );
 
-        driver.rotate(ScreenOrientation.LANDSCAPE);
+        waitForElementAndClick(
+                By.xpath("//*[@text='Империум (Warhammer 40,000)']"),
+                "Cannot find created folder",
+                5
+        );
 
-        String title_after_rotation = waitForElementAndGetAttribute(
+        String title_on_article_page = waitForElementAndGetAttribute(
                 By.id("org.wikipedia:id/view_page_title_text"),
                 "text",
                 "Caanot find title of article",
@@ -391,58 +218,15 @@ public class FirstTest {
         );
 
         Assert.assertEquals(
-                "Article title have been changed after rotation",
-                title_before_rotation,
-                title_after_rotation
+                "Title name is not equal",
+                title_on_folder_page,
+                title_on_article_page
         );
 
-        driver.rotate(ScreenOrientation.PORTRAIT);
 
-        String title_after_second_rotation = waitForElementAndGetAttribute(
-                By.id("org.wikipedia:id/view_page_title_text"),
-                "text",
-                "Caanot find title of article",
-                15
-        );
-
-        Assert.assertEquals(
-                "Article title have been changed after rotation",
-                title_before_rotation,
-                title_after_second_rotation
-        );
     }
 
-    @Test
-    public void testCheckSearchArticleInBackground()
-    {
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_container"),
-                "Cannot find search input",
-                5
 
-        );
-
-        waitForElementAndSendKeys(
-                By.xpath("//*[contains(@text, 'Поиск')]"),
-                "Ересь Хоруса",
-                "Cannot find input element",
-                5
-        );
-
-        waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Ересь Хоруса']"),
-                "Cannot find input",
-                5
-        );
-
-        driver.runAppInBackground(3);
-
-        waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Ересь Хоруса']"),
-                "Cannot find article after returning from background",
-                5
-        );
-    }
 
 
 
