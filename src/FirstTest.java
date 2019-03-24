@@ -47,7 +47,7 @@ public class FirstTest {
 
 
     @Test
-    public void saveTwoArticleToMyListAndDeleteOneWithChekingTitle()
+    public void checkingArticleAttributeTitle()
     {
         waitForElementAndClick(
                 By.id("org.wikipedia:id/search_container"),
@@ -69,158 +69,12 @@ public class FirstTest {
                 5
         );
 
-        waitForElementPresent(
-                By.id("org.wikipedia:id/view_page_title_text"),
-                "Cannot find article",
-                15
-
-        );
-
-        waitForElementAndClick(
-                By.xpath("//android.widget.ImageView[@content-desc='Ещё']"),
-                "Cannot find trippledot",
-                5
-        );
-
-        waitForElementAndClick(
-                By.xpath("//*[@index='3']"),
-                "Cant find button to add article to my list",
-                5
-        );
-
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/onboarding_button"),
-                "Cannot find 'Понятно' button",
-                5
-        );
-
-        waitForElementAndClear(
-                By.id("org.wikipedia:id/text_input"),
-                "Cannot find input to set name of article folder",
-                5
-        );
-
-        String name_of_folder = "Horus Heresy";
-
-        waitForElementAndSendKeys(
-                By.id("org.wikipedia:id/text_input"),
-                name_of_folder,
-                "Cannot put text into article folder input",
-                5
-        );
-
-        waitForElementAndClick(
-                By.xpath("//*[@text='ОК']"),
-                "Cannot press OK button",
-                5
-        );
-
-        waitForElementAndClick(
-                By.xpath("//android.widget.ImageButton[@content-desc='Перейти вверх']"),
-                "Cannot close article, cannot find X link",
-                5
-        );
-
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/search_container"),
-                "Cannot find search input",
-                5
-
-        );
-
-        waitForElementAndSendKeys(
-                By.id("org.wikipedia:id/search_src_text"),
-                "Империум",
-                "Cannot find input element",
-                5
-        );
-
-        waitForElementAndClick(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Империум (Warhammer 40,000)']"),
-                "Cannot find article",
-                5
-        );
-
-        waitForElementPresent(
-                By.id("org.wikipedia:id/view_page_title_text"),
-                "Cannot find article",
-                15
-
-        );
-
-        waitForElementAndClick(
-                By.xpath("//android.widget.ImageView[@content-desc='Ещё']"),
-                "Cannot find trippledot",
-                5
-        );
-
-        waitForElementAndClick(
-                By.xpath("//*[@index='3']"),
-                "Cant find button to add article to my list",
-                5
-        );
-
-        waitForElementAndClick(
-                By.xpath("//*[@text='Horus Heresy']"),
-                "Cannot find 'Понятно' button",
-                5
-        );
-
-
-        waitForElementAndClick(
-                By.xpath("//android.widget.ImageButton[@content-desc='Перейти вверх']"),
-                "Cannot close article, cannot find X link",
-                5
-        );
-
-
-        waitForElementAndClick(
-                By.id("org.wikipedia:id/fragment_main_nav_tab_layout"),
-                "Cannot find navigation button to My lists",
-                5
-        );
-
-        waitForElementAndClick(
-                By.xpath("//*[@text='Horus Heresy']"),
-                "Cannot find created folder",
-                5
-        );
-
-        swipeElementToLeft(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Ересь Хоруса']"),
-                "Cannot find saved article"
-        );
-
-        waitForElementPresent(
-                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Империум (Warhammer 40,000)']"),
-                "The article is not on page",
-                5
-        );
-
-        String title_on_folder_page = waitForElementAndGetAttribute(
-                By.id("org.wikipedia:id/page_list_item_title"),
-                "text",
-                "Cannot find title of article",
-                15
-        );
-
-        waitForElementAndClick(
-                By.xpath("//*[@text='Империум (Warhammer 40,000)']"),
-                "Cannot find created folder",
-                5
-        );
-
-        String title_on_article_page = waitForElementAndGetAttribute(
+        assertElementPresent(
                 By.id("org.wikipedia:id/view_page_title_text"),
                 "text",
-                "Caanot find title of article",
-                15
-        );
+                "There is not article title"
 
-        Assert.assertEquals(
-                "Title name is not equal",
-                title_on_folder_page,
-                title_on_article_page
+
         );
 
 
@@ -378,4 +232,18 @@ public class FirstTest {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         return element.getAttribute(attribute);
     }
+
+
+
+    private void assertElementPresent(By by, String attribute, String error_message)
+    {
+        WebElement element = driver.findElement(by);
+        String page_title = element.getAttribute(attribute);
+        if (page_title == "") {
+            String default_message = "An element " + by.toString() + " supposed to be not present";
+            throw new AssertionError(default_message + " " + error_message);
+        }
+
+    }
+
 }
