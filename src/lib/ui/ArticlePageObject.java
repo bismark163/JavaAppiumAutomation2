@@ -116,4 +116,15 @@ public class ArticlePageObject extends MainPageObject
                 5
         );
     }
+
+    public void assertElementPresent(String attribute, String error_message)
+    {
+        WebElement element = driver.findElement(By.id(TITLE));
+        String page_title = element.getAttribute(attribute);
+        if (page_title == "") {
+            String default_message = "An element " + TITLE + " is not present on page";
+            throw new AssertionError(default_message + " " + error_message);
+        }
+
+    }
 }

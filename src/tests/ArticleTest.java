@@ -42,4 +42,20 @@ public class ArticleTest extends CoreTestCase
         ArticlePageObject.swipeToFooter();
 
     }
+
+    @Test
+    public void testCheckingArticleAttributeTitle()
+    {
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+
+        SearchPageObject.initSearchInput();
+        SearchPageObject.typeSearchLine("Ересь Хоруса");
+        SearchPageObject.clickByArticleWithSubstring("Ересь Хоруса");
+
+        ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
+        ArticlePageObject.assertElementPresent(
+                "text",
+                "There is not article title"
+        );
+    }
 }
