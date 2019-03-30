@@ -9,9 +9,10 @@ public class SearchPageObject extends MainPageObject {
             SEARCH_INIT_ELEMENT = "//*[contains(@text, 'Поиск по Википедии')]",
             SEARCH_INPUT = "//*[contains(@text, 'Поиск')]",
             SEARCH_CANCEL_BUTTON = "org.wikipedia:id/search_close_btn",
-            SEARCH_RESULT_BY_SUBSTRNUG_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='{SUBSTRING}']",
+            SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='{SUBSTRING}']",
             SEARCH_RESULT_ELEMENT = "//*[@resource-id='org.wikipedia:id/search_results_list']/*[@resource-id='org.wikipedia:id/page_list_item_container']",
-            SEARCH_EMPTY_RESULT_ELEMENT = "//*[@text='Ничего не найдено']";
+            SEARCH_EMPTY_RESULT_ELEMENT = "//*[@text='Ничего не найдено']",
+            SEARCH_START_SCREEN_MESSAGE = "org.wikipedia:id/search_empty_message";
 
     public SearchPageObject(AppiumDriver driver)
     {
@@ -21,7 +22,7 @@ public class SearchPageObject extends MainPageObject {
     /* TEMPLATES METHODS */
     private static String getResultSearchElement(String substring)
     {
-        return SEARCH_RESULT_BY_SUBSTRNUG_TPL.replace("{SUBSTRING}", substring);
+        return SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
     }
     /* TEMPLATES METHODS */
 
@@ -86,5 +87,10 @@ public class SearchPageObject extends MainPageObject {
     public void assertThereIsNoResultOfSearch()
     {
         this.assertElementNotPresent(By.xpath(SEARCH_RESULT_ELEMENT), "We supposed not to find any results");
+    }
+
+    public void searchStartPageChecking()
+    {
+        this.waitForElementPresent(By.id(SEARCH_START_SCREEN_MESSAGE), "This is not search start page", 5);
     }
 }

@@ -52,4 +52,18 @@ public class SearchTests extends CoreTestCase
         SearchPageObject.waitForEmptyResultsLabel();
         SearchPageObject.assertThereIsNoResultOfSearch();
     }
+
+// Рефакторинг теста Ex3
+    @Test
+    public void testSearchCancelling()
+    {
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject.initSearchInput();
+        String search_line = "Ересь Хоруса";
+        SearchPageObject.typeSearchLine(search_line);
+        SearchPageObject.waitForSearchResult(search_line);
+        SearchPageObject.clickCancelSearch();
+        SearchPageObject.searchStartPageChecking();
+
+    }
 }
