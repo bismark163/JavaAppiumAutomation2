@@ -7,7 +7,7 @@ public class MyListsPageObject extends MainPageObject {
 
     private static final String
             FOLDER_BY_NAME_TPL = "//*[@text='{FOLDER_NAME}']",
-            ARTICLE_BY_TYTLE_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='{TITLE}']";
+            ARTICLE_BY_TITLE_TPL = "//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='{TITLE}']";
 
     private static String getFolderXpathByName(String name_of_folder)
     {
@@ -24,7 +24,7 @@ public class MyListsPageObject extends MainPageObject {
         super(driver);
     }
 
-    public void openFoderByName(String name_of_folder)
+    public void openFolderByName(String name_of_folder)
     {
         String folder_name_xpath = getFolderXpathByName(name_of_folder);
         this.waitForElementAndClick(

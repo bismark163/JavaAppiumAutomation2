@@ -87,6 +87,27 @@ public class ArticlePageObject extends MainPageObject
 
     }
 
+    public void addArticleToCreatedFolder()
+    {
+        this.waitForElementAndClick(
+                By.xpath(OPTIONS_BUTTON),
+                "Cannot find trippledot",
+                5
+        );
+
+        this.waitForElementAndClick(
+                By.xpath(OPTIONS_ADD_TO_MY_LIST_BUTTON),
+                "да работай блядь",
+                5
+        );
+
+        this.waitForElementAndClick(
+                By.xpath("//*[@text='Horus Heresy']"),
+                "Cannot find created folder " + NAME_OF_FOLDER,
+                5
+        );
+    }
+
     public void closeArticle()
     {
         this.waitForElementAndClick(
