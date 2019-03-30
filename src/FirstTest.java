@@ -240,7 +240,7 @@ public class FirstTest {
         WebElement element = driver.findElement(by);
         String page_title = element.getAttribute(attribute);
         if (page_title == "") {
-            String default_message = "An element " + by.toString() + " supposed to be not present";
+            String default_message = "An element " + by.toString() + " is not present on page";
             throw new AssertionError(default_message + " " + error_message);
         }
 
